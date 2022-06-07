@@ -17,7 +17,6 @@ const bull = (
 export const CardData = (props) => {
   const {data}=props
   const {results}=data
-  console.log("option", props )
   return (
     <Box sx={{display: "flex", gap:'10px', height:'110px', textAlign:'center'}}>
       {
