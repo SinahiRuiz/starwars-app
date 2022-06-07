@@ -8,13 +8,16 @@ import {
   Select,
   InputLabel,
   Button,
+  Typography
 } from "@mui/material";
 import { CardData } from "../Card";
 import { getFetchData } from "../../api/fetchApi";
+import Yoda from "../../assets/img/yoda.png";
 
 export const NavBar = () => {
   const [option, setOption] = useState("");
   const [data, setData] = useState();
+  const [disabledButton, setDisabledButton] = useState(false)
 
   const handleChange = (event) => {
     setOption(event.target.value);
@@ -22,11 +25,16 @@ export const NavBar = () => {
 
   const handleSerch = async () => {
     if (option) {
+      setDisabledButton(true)
       try {
         const response = await getFetchData(option);
         const data = await response;
         setData(data);
+        setDisabledButton(false)
+
       } catch (e) {
+        setDisabledButton(false)
+
         console.error(e);
       }
     }
@@ -76,7 +84,7 @@ export const NavBar = () => {
               <MenuItem value={"starships"}>Starships</MenuItem>
             </Select>
           </FormControl>
-          <Button variant="outlined" onClick={handleSerch}>
+          <Button variant="outlined" onClick={handleSerch} disabled={disabledButton}>
             Search
           </Button>
         </Toolbar>
@@ -94,7 +102,14 @@ export const NavBar = () => {
           justifyContent: "center"
         }}
       >
-        {data && <CardData data={data} />}
+        {data ? <CardData data={data}/>
+        :<Box sx={{textAlign:'center'}}>
+           <Typography sx={{ fontSize: 60, color:'rgba(200,255,200,0.5)', textShadow:'0 0 5px green, 0 0 5px green, 0 0 5px green' }}>
+             Search something! 
+             </Typography>
+             <img src={Yoda} width='300px'/>
+             </Box>
+        }
       </Box>
     </Box>
   );
