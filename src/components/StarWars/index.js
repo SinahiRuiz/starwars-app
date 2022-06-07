@@ -14,7 +14,7 @@ import { CardData } from "../Card";
 import { getFetchData } from "../../api/fetchApi";
 import Yoda from "../../assets/img/yoda.png";
 
-export const NavBar = () => {
+export const StarWars = () => {
   const [option, setOption] = useState("");
   const [data, setData] = useState();
   const [disabledButton, setDisabledButton] = useState(false)

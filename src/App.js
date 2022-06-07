@@ -1,12 +1,12 @@
 import './App.css';
-import { NavBar } from './components/NavBar';
+import { StarWars } from './components/StarWars';
 import {Box} from '@mui/material';
 
 
 function App() {
   return (
     <>
-     <NavBar />
+     <StarWars />
     </>
   );
 }
