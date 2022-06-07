@@ -17,19 +17,21 @@ import Yoda from "../../assets/img/yoda.png";
 export const StarWars = () => {
   const [option, setOption] = useState("");
   const [data, setData] = useState();
+  const [toSearch, setToSearch] = useState("")
   const [disabledButton, setDisabledButton] = useState(false)
 
   const handleChange = (event) => {
     setOption(event.target.value);
   };
 
-  const handleSerch = async () => {
+  const handleSearch = async () => {
     if (option) {
       setDisabledButton(true)
       try {
         const response = await getFetchData(option);
         const data = await response;
         setData(data);
+        setToSearch(option);
         setDisabledButton(false)
 
       } catch (e) {
@@ -61,30 +63,30 @@ export const StarWars = () => {
           <FormControl
             sx={{
               m: 1,
-              minWidth: 200,
+              minWidth: 230,
               background: "#fff",
               justifyContent: "center",
             }}
           >
-            <InputLabel id="demo-simple-select-helper-label">
-              Select An Option!
-            </InputLabel>
             <Select
               labelId="demo-simple-select-helper-label"
               id="demo-simple-select-helper"
               value={option}
               label="Select An Option!"
               onChange={handleChange}
+              sx={{
+                fontSize:18,
+                color:'black'}}
             >
-              <MenuItem value="">
+              <MenuItem value="" sx={{fontSize:16,  color:'black'}}>
                 <em>Select an option!</em>
               </MenuItem>
-              <MenuItem value={"people"}>People</MenuItem>
-              <MenuItem value={"planets"}>Planets</MenuItem>
-              <MenuItem value={"starships"}>Starships</MenuItem>
+              <MenuItem sx={{fontSize:16,  color:'black'}} value={"people"}>People</MenuItem>
+              <MenuItem sx={{fontSize:16,  color:'black'}} value={"planets"}>Planets</MenuItem>
+              <MenuItem sx={{fontSize:16,  color:'black'}} value={"starships"}>Starships</MenuItem>
             </Select>
           </FormControl>
-          <Button variant="outlined" onClick={handleSerch} disabled={disabledButton}>
+          <Button variant="contained" color="secondary" sx={{width:80, height:40}} onClick={handleSearch} disabled={disabledButton} disableElevation>
             Search
           </Button>
         </Toolbar>
@@ -102,7 +104,11 @@ export const StarWars = () => {
           justifyContent: "center"
         }}
       >
-        {data ? <CardData data={data}/>
+        {data ? 
+        <Box sx={{textAlign:'center'}}>
+         <Typography sx={{color:'rgba(200,255,200,0.5)', textShadow:'0 0 5px green, 0 0 5px green, 0 0 5px green', fontSize:45, pb:2, textTransform:'capitalize'}}>{toSearch}</Typography>
+          <CardData data={data} />
+          </Box>
         :<Box sx={{textAlign:'center'}}>
            <Typography sx={{ fontSize: 60, color:'rgba(200,255,200,0.5)', textShadow:'0 0 5px green, 0 0 5px green, 0 0 5px green' }}>
              Search something! 

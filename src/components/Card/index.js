@@ -17,15 +17,15 @@ const bull = (
 export const CardData = (props) => {
   const {data}=props
   const {results}=data
-  console.log("results", results )
+  console.log("option", props )
   return (
-    <Box sx={{display: "flex", gap:'20px', height:'130px'}}>
+    <Box sx={{display: "flex", gap:'10px', height:'110px', textAlign:'center'}}>
       {
         results.map((item, index)=>(
-          <Card sx={{ width: '130px'}} key={index}>
+          <Card sx={{ width: '110px', background:'rgba(255,200,255,0.5)'}} key={index}>
           <CardContent>
-            <h1>Name:</h1>
-            <Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
+            <Typography sx={{color:'rgba(255,200,255,0.5)', textShadow:'0 0 3px purple, 0 0 3px purple, 0 0 3px purple', fontSize:20}}>Name</Typography>
+            <Typography sx={{ fontSize: 18 }} color="black" gutterBottom>
               {item.name}
             </Typography>
           </CardContent>
